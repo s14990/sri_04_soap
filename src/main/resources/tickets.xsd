@@ -1,0 +1,130 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://sri04/tickets"
+           targetNamespace="http://sri04/tickets"
+            elementFormDefault="qualified">
+    <xs:complexType name="ticketDto">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="1" />
+            <xs:element name="code" type="xs:string" minOccurs="0"/>
+            <xs:element name="flightDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="price" type="xs:double" minOccurs="0" />
+            <xs:element name="seat" type="xs:string" minOccurs="0" />
+            <xs:element name="owner" type="xs:string" minOccurs="0" />
+            <xs:element name="registerDate" type="xs:date" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="cancelFlightRequestDto">
+        <xs:sequence>
+            <xs:element name="flightCode" type="xs:string" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cancelFlightResponseDto">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="1"/>
+            <xs:element name="refundFullSum" type="xs:double" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="purchaseRequestDto">
+        <xs:sequence>
+            <xs:element name="ticketId" type="xs:long" minOccurs="1"/>
+            <xs:element name="owner" type="xs:string" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="refundRequestDto">
+        <xs:sequence>
+            <xs:element name="ticketId" type="xs:long" minOccurs="1"/>
+            <xs:element name="flightCode" type="xs:string" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="refundResponseDto">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="1"/>
+            <xs:element name="returnSum" type="xs:double" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:element name="getTicketsRequest" >
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="getTicketsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tickets" type="tns:ticketDto" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addTicketRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ticket" type="tns:ticketDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addTicketResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ticketId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="buyTicketRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="request" type="tns:purchaseRequestDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="buyTicketResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tns:ticketDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refundTicketRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="request" type="tns:refundRequestDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refundTicketResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tns:refundResponseDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelFlightRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="request" type="tns:cancelFlightRequestDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelFlightResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tns:cancelFlightResponseDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
